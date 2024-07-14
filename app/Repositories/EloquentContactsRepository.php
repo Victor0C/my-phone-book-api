@@ -20,10 +20,10 @@ class EloquentContactsRepository implements ContactsRepositoryInterface
         $query = Contact::query();
 
         if ($name) {
-            $query->where('title', 'like', '%' . $name . '%');
+            $query->where('name', 'like', '%' . $name . '%');
         }
 
-        return $query->paginate($this->paginate);
+        return $query->paginate($this->paginate)->appends(['name' => $name]);
     }
 
     public function find(int $id): Contact
