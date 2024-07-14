@@ -28,7 +28,7 @@ class ContactsRequest extends FormRequest
         if ($method == 'POST') {
             return [
                 'name' => 'required|string|max:25',
-                'number' => 'required|string|regex:/^[0-9]{10,20}$/',
+                'number' => 'required|string|max:14|regex:/^[0-9]{10,20}$/',
 
             ];
         }
@@ -36,7 +36,7 @@ class ContactsRequest extends FormRequest
         if ($method == 'PUT' || $method == 'PATCH') {
             return [
                 'name' => 'sometimes|string|max:25',
-                'number' => 'sometimes|string|regex:/^\+?[0-9\-\(\)\s]{10,20}$/',
+                'number' => 'sometimes|string|max:14|regex:/^\+?[0-9\-\(\)\s]{10,20}$/',
             ];
         }
 
@@ -55,6 +55,7 @@ class ContactsRequest extends FormRequest
             'name.max' => 'The name may not be greater than 25 characters.',
             'number.required' => 'The number field is required.',
             'number.regex' => 'The number field must be a valid phone number with no special characters.',
+            'number.max' => 'The number field has a maximum length of 14 characters.',
         ];
     }
 
